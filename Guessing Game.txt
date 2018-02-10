@@ -1,0 +1,152 @@
+/*Preston Lewis
+The Guessing Game*/
+# include <stdio.h>
+#include <stdlib.h>
+//functon prototype
+int game(int num,int level);
+int main(void)
+{
+	int level=0;
+	int num=0;
+
+	printf("Welcome to the guessing game!\nChoose the number that corresponds to the difficulty you want\n\n(1)Easy\n(2)Medium\n(3)Hard\n(4)Extreme\n");
+	scanf_s("%d", &level);
+
+	while (level > 4 || level < 0)
+	{
+		printf("Please select a number from 1-4 to choose your difficulty.\n");
+		scanf_s("%d", &level);
+	}
+	
+	switch (level)
+	{
+		
+	case 1:
+		srand(time(0));
+		printf("You have chosen an easy game.\nNow chose a number between 1-10\n");
+		num = rand()%10+1;
+		printf("%d", num);
+		break;
+	
+	case 2:
+		srand(time(0));
+		printf("You have chosen a medium game.\nNow chose a number between 1-100\n");
+		num = rand() % 100+1;
+		printf("%d", num);
+		break;
+	
+	case 3:
+		srand(time(0));
+		printf("You have chosen a hard game.\nNow chose a number between 1-1000\n");
+		num = rand() % 1000+1;
+		printf("%d", num);
+		break;
+	
+	case 4:
+		srand(time(0));
+		printf("You have chosen an extreme game.\nNow chose a number between 1-10000\n");
+		num = rand() % 10000+1;
+		printf("%d", num);
+		break;
+	}
+	game(num,level);
+		return 0;
+}
+
+int game(num,level)
+{
+	int ans = 0;
+	int tries=0;
+	int triesLeft=0;
+	int stars = 0;
+	int playAgain=0;
+	int quit=0;
+	switch (level)
+	{
+	case 1:
+		triesLeft = 5;
+		break;
+
+	case 2:
+		triesLeft = 20;
+		break;
+
+	case 3:
+		triesLeft = 30;
+		break;
+
+	case 4:
+		triesLeft = 40;
+		break;
+
+	}
+	do{
+		scanf_s("%d", &ans);
+		tries++;
+		triesLeft--;
+		if(num!= ans && triesLeft > 0)
+		{
+			if (ans < num)
+			{
+				printf("\nGuess again (GUESS HIGHER)\nAttempts left: %d\n",triesLeft);
+			}
+			 
+			else if (ans > num)
+			{
+				printf("\nGuess again (GUESS LOWER)\nAttempts left: %d\n",triesLeft);
+			}
+
+			else
+			{
+				printf("please enter a number");
+			}
+		}
+	} while (ans != num && triesLeft > 0);
+
+	if (ans == num)
+	{
+		printf("YOU GOT IT!\n");
+		if (tries <= 10)
+		{
+			stars = 3;
+			printf("\nScore: ***\n");
+		}
+		else if (tries <= 20 && tries > 10)
+		{
+			stars = 2;
+			printf("\nScore: **\n");
+		}
+		else
+		{
+			stars = 1;
+			printf("\nScore: *\n");
+		}
+     printf("It took you %d attempt(s) and you got %d stars on level %d\n", tries, stars, level);
+	}
+	if (triesLeft == 0)
+	{
+		printf("\nLooks like you ran out of luck\nThe correct number was %d\n", num);
+	}
+	printf("\nDo want to play again?(press 1 for yes or q to quit)\n");
+
+	do
+	{
+		scanf_s("%d", &playAgain);
+		quit = getchar();
+		if (playAgain == 1)
+		{
+			main();
+		}
+		else if (quit == 'q')
+		{
+			printf("\nTERMINATED\n");
+			
+		}
+		else
+		{
+			printf("Press 1 for yes or q to quit");
+			
+		}
+	} while (playAgain != 1 || quit != 'q');
+	return 0;
+}
