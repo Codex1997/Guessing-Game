@@ -103,31 +103,107 @@ int game(num,level)
 		}
 	} while (ans != num && triesLeft > 0);
 
+	switch (level)
+	{
+	case 1:
+		if (ans == num)
+		{
+			printf("\nYOU GOT IT!\n");
+			if (tries <= 2)
+			{
+				stars = 3;
+				printf("\nScore: ***\n");
+			}
+			else if (tries == 3)
+			{
+				stars = 2;
+				printf("\nScore: **\n");
+			}
+			else
+			{
+				stars = 1;
+				printf("\nScore: *\n");
+			}
+			break;
+		}
+
+	case 2:
+		if (ans == num)
+		{
+			printf("\nYOU GOT IT!\n");
+			if (tries <= 10)
+			{
+				stars = 3;
+				printf("\nScore: ***\n");
+			}
+			else if (tries > 10 && tries <=15)
+			{
+				stars = 2;
+				printf("\nScore: **\n");
+			}
+			else
+			{
+				stars = 1;
+				printf("\nScore: *\n");
+			}
+			break;
+		}
+
+	case 3:
+		if (ans == num)
+		{
+			printf("\nYOU GOT IT!\n");
+			if (tries <= 15)
+			{
+				stars = 3;
+				printf("\nScore: ***\n");
+			}
+			else if (tries < 15 && tries <= 25)
+			{
+				stars = 2;
+				printf("\nScore: **\n");
+			}
+			else
+			{
+				stars = 1;
+				printf("\nScore: *\n");
+			}
+			break;
+		}
+	case 4:
+		if (ans == num)
+		{
+			printf("\nYOU GOT IT!\n");
+			if (tries <= 20)
+			{
+				stars = 3;
+				printf("\nScore: ***\n");
+			}
+			else if (tries <20 && tries <=30)
+			{
+				stars = 2;
+				printf("\nScore: **\n");
+			}
+			else
+			{
+				stars = 1;
+				printf("\nScore: *\n");
+			}
+			break;
+		}
+	
+	}
+     
 	if (ans == num)
 	{
-		printf("YOU GOT IT!\n");
-		if (tries <= 10)
-		{
-			stars = 3;
-			printf("\nScore: ***\n");
-		}
-		else if (tries <= 20 && tries > 10)
-		{
-			stars = 2;
-			printf("\nScore: **\n");
-		}
-		else
-		{
-			stars = 1;
-			printf("\nScore: *\n");
-		}
-     printf("It took you %d attempt(s) and you got %d stars on level %d\n", tries, stars, level);
+		printf("It took you %d attempt(s) and you got %d stars on level %d\n", tries, stars, level);
 	}
+	
 	if (triesLeft == 0)
 	{
 		printf("\nLooks like you ran out of luck\nThe correct number was %d\n", num);
 	}
-	printf("\nDo want to play again?(press 1 for yes or q to quit)\n");
+	printf("\nDo want to play again? (press 1 for yes or q to quit)\n");
 
 	do
 	{
@@ -140,11 +216,12 @@ int game(num,level)
 		else if (quit == 'q')
 		{
 			printf("\nTERMINATED\n");
+			exit(1);
 			
 		}
 		else
 		{
-			printf("Press 1 for yes or q to quit");
+			printf("\nPress 1 for yes or q to quit\n");
 			
 		}
 	} while (playAgain != 1 || quit != 'q');
